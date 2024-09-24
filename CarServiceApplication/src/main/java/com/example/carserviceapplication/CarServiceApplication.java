@@ -1,13 +1,13 @@
-package com.example.carsmicroservice;
+package com.example.carserviceapplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CarsMicroServiceApplication {
+public class CarServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CarsMicroServiceApplication.class, args);
+		SpringApplication.run(CarServiceApplication.class, args);
 	}
 
 }
