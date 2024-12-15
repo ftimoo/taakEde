@@ -1,8 +1,6 @@
 package com.example.driverserviceapplication.controller;
 
-import com.example.driverserviceapplication.DTO.DriverRequest;
 import com.example.driverserviceapplication.model.Driver;
-import com.example.driverserviceapplication.repository.DriverRepository;
 import com.example.driverserviceapplication.service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,17 +10,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/car")
+@RequiredArgsConstructor
 public class DriverController {
-    private DriverService driverService;
 
-    public DriverController(DriverService driverService) {
-        this.driverService = driverService;
-    }
+    private final DriverService driverService;
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Driver> getAllProducts() {
+    public List<Driver> getAllOrders() {
         return driverService.getAllDrivers();
     }
-
 }

@@ -1,13 +1,17 @@
 package com.example.driverserviceapplication.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "drivers")
-@Data
-@NoArgsConstructor
+@Table(name = "driver")
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
