@@ -6,21 +6,21 @@ services:
   volumes:
     - mongodb_car_data:/data/db
     
- mysql-order:
+ mysql-driver:
   image: mysql:latest
   ports:
     - 3306:3306
   volumes:
-    - mysql_order_data:/var/lib/mysql
+    - mysql_driver_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- mysql-inventory:
+ mysql-tour:
   image: mysql:latest
   ports:
     - 3307:3306
   volumes:
-    - mysql_inventory_data:/var/lib/mysql
+    - mysql_tour_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
@@ -36,7 +36,31 @@ services:
    MONGODB_PORT: 27017
    MONGODB_HOST: mongo-cars
    
+ tour-service:
+  depends_on:
+    - mysql-tour
+  image: timofaes/tour-service:latest
+  ports:
+    - 8081:8081
+  links:
+    - mysql-tour
+  environment:
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-tour
+   MYSQL_DB_PORT: 3306
+
+ driver-service:
+  image: timofaes/driver-service
+  ports:
+    - 8082:8082
+  environment:
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-driver
+   MYSQL_DB_PORT: 3306
+
 volumes:
  mongodb_car_data:
- mysql_inventory_data:
- mysql_order_data:
+ mysql_driver_data:
+ mysql_tour_data:
