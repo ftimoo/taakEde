@@ -1,0 +1,42 @@
+services:
+ mongo-cars:
+  image: mongo:latest
+  ports:
+    - 27017:27017
+  volumes:
+    - mongodb_car_data:/data/db
+    
+ mysql-order:
+  image: mysql:latest
+  ports:
+    - 3306:3306
+  volumes:
+    - mysql_order_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+ mysql-inventory:
+  image: mysql:latest
+  ports:
+    - 3307:3306
+  volumes:
+    - mysql_inventory_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+ car-service:
+  depends_on:
+    - mongo-cars
+  image: timofaes/car-service:latest
+  ports:
+    - 8080:8080
+  links:
+    - mongo-cars
+  environment:
+   MONGODB_PORT: 27017
+   MONGODB_HOST: mongo-cars
+   
+volumes:
+ mongodb_car_data:
+ mysql_inventory_data:
+ mysql_order_data:
