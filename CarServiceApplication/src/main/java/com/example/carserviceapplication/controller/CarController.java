@@ -30,17 +30,18 @@ public class CarController {
         return carService.getAllCars();
     }
 
-    @PutMapping
-    public Object updateCar(@RequestBody Car car) {
-        if (carService.updateCar(car)){
-            return new ResponseEntity<>(car,HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCar(@PathVariable String id, @RequestBody Car car) {
+        car.setId(id); // Ensure the ID in the URL is set in the Car object
+        if (carService.updateCar(car)) {
+            return new ResponseEntity<>(car, HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>("Car not found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Car not found", HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping ResponseEntity<String> deleteCar(@RequestBody Car car){
-
-        Boolean deleted =  carService.deleteCar(car);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCar(@PathVariable String id){
+        Boolean deleted =  carService.deleteCarById(id);
         if (deleted){
             return new ResponseEntity<>("Car deleted",HttpStatus.ACCEPTED);
         }

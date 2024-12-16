@@ -11,11 +11,35 @@ logging:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
       routes:
         - id: car-service-all
-          uri: http://localhost:8080
+          uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
           predicates:
-            - Path=/cars
-            - Method=GET
+            - Path=/car
+            - Method=GET,OPTIONS
           filters:
             - SetPath=/api/car/all
+        - id: car-service-post
+          uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
+          predicates:
+            - Path=/car
+            - Method=POST,OPTIONS
+          filters:
+            - SetPath=/api/car
+        - id: car-service-post
+          uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
+          predicates:
+            - Path=/car/{id}
+            - Method=PUT,OPTIONS
+          filters:
+            - SetPath=/api/car/{id}
+        - id: car-service-post
+          uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
+          predicates:
+            - Path=/car/{id}
+            - Method=DELETE,OPTIONS
+          filters:
+            - SetPath=/api/car/{id}
+
