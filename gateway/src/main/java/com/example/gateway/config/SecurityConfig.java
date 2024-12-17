@@ -1,4 +1,4 @@
-package fact.it.apigateway.config;
+package com.example.gateway.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
