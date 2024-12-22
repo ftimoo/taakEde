@@ -1,20 +1,26 @@
-Shema
+
+# Project Aadvanced Programming Topics
+
+As a project I created a taxi service using microservices paradime.
+
+## Shema
 
 ![image](https://github.com/user-attachments/assets/6bc8f141-649d-4983-b55a-fac40a8a83ee)
 
-Cars: 
-get /cars
-get /car/{id}
-delete /car/{id}
-put /car/{id}
-post /car
-Tour: 
-get /tour (returns all tours)
-Driver:
-get /driver (returns all drivers)
-get /driver/{id}
+## routes
 
-Cars
+| **Entity** | **HTTP Method** | **Route**          | **Description**                |
+|------------|-----------------|--------------------|--------------------------------|
+| **Cars**   | `GET`           | `/cars`            | Retrieves all cars             |
+|            | `GET`           | `/car/{id}`        | Retrieves a specific car by ID |
+|            | `DELETE`        | `/car/{id}`        | Deletes a specific car by ID   |
+|            | `PUT`           | `/car/{id}`        | Updates a specific car by ID   |
+|            | `POST`          | `/car`             | Creates a new car              |
+| **Tour**   | `GET`           | `/tour`            | Retrieves all tours            |
+| **Driver** | `GET`           | `/driver`          | Retrieves all drivers          |
+|            | `GET`           | `/driver/{id}`     | Retrieves a specific driver by ID | 
+
+## Cars
 
 ![image](https://github.com/user-attachments/assets/845fee79-d5a8-4c9d-88fa-7bb08782e88d)
 
@@ -36,6 +42,7 @@ Bmw put to I series from m4
 ![image](https://github.com/user-attachments/assets/0d41ee42-57af-4484-a325-786f710a6dbe)
 get na changes
 
+## Tours
 
 ![image](https://github.com/user-attachments/assets/f9d1a6ec-80b9-4052-aa65-961ac9d85028)
 Get Tours
@@ -62,6 +69,7 @@ Get Tours
     }
 ]
 
+## Driver
 
 ![image](https://github.com/user-attachments/assets/d89060c9-785f-455b-bb84-7bea1702cf06)
 Get drivers
