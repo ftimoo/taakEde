@@ -2,6 +2,7 @@ package com.example.carserviceapplication.service;
 
 
 import com.example.carserviceapplication.DTO.CarRequest;
+import com.example.carserviceapplication.DTO.CarResponse;
 import com.example.carserviceapplication.model.Car;
 import com.example.carserviceapplication.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +33,11 @@ public class CarService {
         carRepository.save(car);
     }
 
-    public List<Car> getAllCars(){
+    public List<CarResponse> getAllCars(){
         List<Car> cars = carRepository.findAll();
-        return cars;
+        return cars.stream()
+                .map(car -> new CarResponse(car)) 
+                .collect(Collectors.toList());
     }
 
     public Optional<Car> getCarById(String id) {
@@ -55,6 +59,7 @@ public class CarService {
         }
         return false;
     }
+
 
 
 

@@ -1,6 +1,7 @@
 package com.example.carserviceapplication.controller;
 
 import com.example.carserviceapplication.DTO.CarRequest;
+import com.example.carserviceapplication.DTO.CarResponse;
 import com.example.carserviceapplication.model.Car;
 import com.example.carserviceapplication.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class CarController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<Car> getAllCars() {
+    public List<CarResponse> getAllCars() {
         return carService.getAllCars();
     }
     @GetMapping("/{id}")
