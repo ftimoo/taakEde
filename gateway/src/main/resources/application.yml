@@ -30,7 +30,7 @@ spring:
           uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
           predicates:
             - Path=/cars
-            - Method=GET,OPTIONS
+            - Method=GET
           filters:
             - SetPath=/api/car/all
         - id: car-service-id
