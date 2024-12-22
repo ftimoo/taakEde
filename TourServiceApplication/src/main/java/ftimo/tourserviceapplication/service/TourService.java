@@ -29,7 +29,7 @@ public class TourService{
 
     public TourResponse createTourResponse(Long tourId, Long carId, Long driverId, String name, float price) {
         // Fetch car details
-        Mono<CarDto> carMono = fetchCarById(carId);
+        CarDto car = fetchCarById(carId);
 
         // Fetch driver details
         DriverDto driver = fetchDriverById(driverId);
@@ -44,12 +44,21 @@ public class TourService{
 
         return tourResponse;
     }
-    private Mono<CarDto> fetchCarById(Long carId) {
-        String url = String.format("%s/cars/%d", carServiceBaseUrl, carId);
+    private CarDto fetchCarById(Long carId) {
+        String url = String.format("%s/api/car/%d", carServiceBaseUrl, carId);
         return webClient.get()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(CarDto.class);
+                .bodyToMono(CarDto.class)
+                .block();
+    }
+    private DriverDto fetchDriverById(Long driverId) {
+        String url = String.format("%s/api/driver/%d", driverServiceBaseUrl , driverId);
+        return webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(DriverDto.class)
+                .block();
     }
 
 

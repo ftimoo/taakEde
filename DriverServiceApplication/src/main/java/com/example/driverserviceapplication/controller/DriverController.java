@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/driver")
@@ -15,6 +16,12 @@ import java.util.List;
 public class DriverController {
 
     private final DriverService driverService;
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Driver> getCarById(@PathVariable Long id) {
+        return driverService.getDriverById(id);
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
