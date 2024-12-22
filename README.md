@@ -7,7 +7,7 @@ As a project I created a taxi service using microservices paradime.
 
 ![image](https://github.com/user-attachments/assets/6bc8f141-649d-4983-b55a-fac40a8a83ee)
 
-## routes
+## Routes
 
 | **Entity** | **HTTP Method** | **Route**          | **Description**                |
 |------------|-----------------|--------------------|--------------------------------|
