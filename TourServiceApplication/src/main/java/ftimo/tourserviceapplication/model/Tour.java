@@ -17,7 +17,7 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long driverId;
-    private Long carId;
+    private String carId;
     private String name;
     private float price;
 }
