@@ -24,7 +24,7 @@ As a project I created a taxi service using microservices paradime.
 
 ![image](https://github.com/user-attachments/assets/845fee79-d5a8-4c9d-88fa-7bb08782e88d)
 
-The un autherized egt request
+The un autherized get request
 
 ![image](https://github.com/user-attachments/assets/1d72aac7-642e-44e6-be8d-3fd634f6c108)
 
