@@ -3,6 +3,7 @@ package ftimo.tourserviceapplication.dto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToOne;
 import lombok.*;
+import org.reactivestreams.Publisher;
 
 @Getter
 @Setter

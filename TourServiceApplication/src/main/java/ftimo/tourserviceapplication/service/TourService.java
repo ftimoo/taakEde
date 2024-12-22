@@ -60,7 +60,7 @@ public class TourService{
                 .map(this::createTourResponse)
                 .collect(Collectors.toList());
     }
-    private CarDto fetchCarById(String carId) {
+    public CarDto fetchCarById(String carId) {
         String url = String.format("%s/api/car/%s", carServiceBaseUrl, carId);
         return webClient.get()
                 .uri(url)
@@ -68,7 +68,7 @@ public class TourService{
                 .bodyToMono(CarDto.class)
                 .block();
     }
-    private DriverDto fetchDriverById(Long driverId) {
+    public DriverDto fetchDriverById(Long driverId) {
         String url = String.format("%s/api/driver/%d", driverServiceBaseUrl , driverId);
         return webClient.get()
                 .uri(url)
