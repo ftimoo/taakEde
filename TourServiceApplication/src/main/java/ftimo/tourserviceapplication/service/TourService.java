@@ -29,7 +29,7 @@ public class TourService{
     private String carServiceBaseUrl;
 
     public TourResponse createTourResponse(Tour tour) {
-        Long carId = tour.getCarId();
+        String carId = tour.getCarId();
         Long driverId = tour.getDriverId();
         Long tourId = tour.getId();
         String name = tour.getName();
@@ -60,8 +60,8 @@ public class TourService{
                 .map(this::createTourResponse)
                 .collect(Collectors.toList());
     }
-    private CarDto fetchCarById(Long carId) {
-        String url = String.format("%s/api/car/%d", carServiceBaseUrl, carId);
+    private CarDto fetchCarById(String carId) {
+        String url = String.format("%s/api/car/%s", carServiceBaseUrl, carId);
         return webClient.get()
                 .uri(url)
                 .retrieve()

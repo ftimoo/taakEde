@@ -49,6 +49,8 @@ services:
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-tour
    MYSQL_DB_PORT: 3306
+   DRIVER_SERVICE_BASEURL: http://driver-service:8082
+   CAR_SERVICE_BASEURL: http://car-service:8080
 
  driver-service:
   image: timofaes/driver-service
