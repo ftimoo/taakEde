@@ -20,6 +20,7 @@ public class SecurityConfig {
                         exchange.pathMatchers(HttpMethod.GET,"/cars")
                                 .permitAll()
                                 .anyExchange()
+                                .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
