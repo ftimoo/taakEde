@@ -33,6 +33,13 @@ spring:
             - Method=GET,OPTIONS
           filters:
             - SetPath=/api/car/all
+        - id: car-service-id
+          uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
+          predicates:
+            - Path=/car/{id}
+            - Method=GET,OPTIONS
+          filters:
+            - SetPath=/api/car/{id}
         - id: car-service-post
           uri: ${CAR_SERVICE_BASEURL:http://localhost:8080}
           predicates:
@@ -54,4 +61,24 @@ spring:
             - Method=DELETE,OPTIONS
           filters:
             - SetPath=/api/car/{id}
-
+        - id: tour-service-get
+          uri: ${TOUR_SERVICE_BASEURL:http://localhost:8081}
+          predicates:
+            - Path=/tour
+            - Method=GET,OPTIONS
+          filters:
+            - SetPath=/api/tour
+        - id: driver-service-get
+          uri: ${DRIVER_SERVICE_BASEURL:http://localhost:8082}
+          predicates:
+            - Path=/driver
+            - Method=GET,OPTIONS
+          filters:
+            - SetPath=/api/driver
+        - id: driver-service-get-by-id
+          uri: ${DRIVER_SERVICE_BASEURL:http://localhost:8082}
+          predicates:
+            - Path=/driver/{id}
+            - Method=GET,OPTIONS
+          filters:
+            - SetPath=/api/driver/{id}
