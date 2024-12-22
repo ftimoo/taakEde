@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,11 +16,14 @@ public class DriverService{
     private final DriverRepository driverRepository;
 
 
-    public List<Driver> getAllDrivers() {
-        List<Driver> drivers = driverRepository.findAll();
 
-        //return drivers.stream().map(order -> new OrderResponse(order.getOrderNumber(),mapToOrderLineItemsDto(order.getOrderLineItemsList()))).collect(Collectors.toList());
-        return drivers;
+        public List<Driver> getAllDrivers() {
+            return driverRepository.findAll();
+        }
+
+        public Optional<Driver> getDriverById(Long id) {
+            return driverRepository.findById(id);
+        }
     }
 
-}
+
