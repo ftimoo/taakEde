@@ -15,5 +15,5 @@ public class CarRequest {
     private String plate;
     private String model;
     private String brand;
-    private BigDecimal odometer;
+    private Integer odometer;
 }
