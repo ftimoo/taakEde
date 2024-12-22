@@ -1,13 +1,13 @@
 package com.example.carserviceapplication.DTO;
 
 import com.example.carserviceapplication.model.Car;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@Getter
+@Setter
 public class CarResponse {
 
         private String id;
