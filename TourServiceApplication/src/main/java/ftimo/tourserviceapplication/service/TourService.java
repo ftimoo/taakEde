@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +28,15 @@ public class TourService{
     @Value("${carservice.baseurl}")
     private String carServiceBaseUrl;
 
-    public TourResponse createTourResponse(Long tourId, Long carId, Long driverId, String name, float price) {
+    public TourResponse createTourResponse(Tour tour) {
+        Long carId = tour.getCarId();
+        Long driverId = tour.getDriverId();
+        Long tourId = tour.getId();
+        String name = tour.getName();
+        float price = tour.getPrice();
+
+
+
         // Fetch car details
         CarDto car = fetchCarById(carId);
 
@@ -43,6 +52,13 @@ public class TourService{
         tourResponse.setPrice(price);
 
         return tourResponse;
+    }
+    public List<TourResponse> getAllTours(){
+        List<Tour> tours = tourRepository.findAll();
+
+        return tours.stream()
+                .map(this::createTourResponse)
+                .collect(Collectors.toList());
     }
     private CarDto fetchCarById(Long carId) {
         String url = String.format("%s/api/car/%d", carServiceBaseUrl, carId);

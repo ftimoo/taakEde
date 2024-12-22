@@ -1,6 +1,6 @@
 package ftimo.tourserviceapplication.controller;
 
-import ftimo.tourserviceapplication.model.Tour;
+import ftimo.tourserviceapplication.dto.TourResponse;
 import ftimo.tourserviceapplication.service.TourService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class TourController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Tour> getAllOrders() {
+    public List<TourResponse> getAllOrders() {
         return tourService.getAllTours();
     }
 }
