@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/car")
@@ -26,8 +27,13 @@ public class CarController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<Car> getAllProducts() {
+    public List<Car> getAllCars() {
         return carService.getAllCars();
+    }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Car> getCarById(@PathVariable String id) {
+        return carService.getCarById(id);
     }
 
     @PutMapping("/{id}")

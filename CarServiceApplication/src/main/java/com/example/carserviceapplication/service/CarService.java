@@ -7,7 +7,11 @@ import com.example.carserviceapplication.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -31,6 +35,11 @@ public class CarService {
         List<Car> cars = carRepository.findAll();
         return cars;
     }
+
+    public Optional<Car> getCarById(String id) {
+        Optional<Car> carOptional = carRepository.findById(id);
+        return carOptional;
+    }
     public Boolean updateCar(Car car){
         if (carRepository.findById(car.getId()).isPresent()){
             carRepository.save(car);
@@ -46,5 +55,8 @@ public class CarService {
         }
         return false;
     }
+
+
+
 
 }

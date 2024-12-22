@@ -1,5 +1,6 @@
 package ftimo.tourserviceapplication.service;
 
+import ftimo.tourserviceapplication.dto.CarDto;
 import ftimo.tourserviceapplication.dto.DriverDto;
 import ftimo.tourserviceapplication.dto.TourResponse;
 import ftimo.tourserviceapplication.model.Tour;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.*;
 
@@ -22,29 +24,34 @@ public class TourService{
     @Value("${driverservice.baseurl}")
     private String driverServiceBaseUrl;
 
+    @Value("${carservice.baseurl}")
+    private String carServiceBaseUrl;
 
-    public List<Tour> getAllTours() {
-        List<Tour> tours = tourRepository.findAll();
-        List<TourResponse> rtours = new ArrayList<TourResponse>();
+    public TourResponse createTourResponse(Long tourId, Long carId, Long driverId, String name, float price) {
+        // Fetch car details
+        Mono<CarDto> carMono = fetchCarById(carId);
 
-        for (Tour e : tours) {
-            TourResponse rtour = new TourResponse();
-            rtour.setName(e.getName());
-            rtour.setPrice(e.getPrice());
-            DriverDto[] drivers = webClient.get()
-                    .uri("http://" + driverServiceBaseUrl + "/api/driver",
-                            uriBuilder ->  uriBuilder.queryParam("id", e.getDriverId()).build())
-                    .retrieve()
-                    .bodyToMono(DriverDto[].class)
-                    .block();
+        // Fetch driver details
+        DriverDto driver = fetchDriverById(driverId);
 
-            System.out.println(drivers[0].getFirstName());
+        // Create and return TourResponse
+        TourResponse tourResponse = new TourResponse();
+        tourResponse.setId(tourId);
+        tourResponse.setCar(car);
+        tourResponse.setDriver(driver);
+        tourResponse.setName(name);
+        tourResponse.setPrice(price);
 
-
-        }
-
-        //return drivers.stream().map(order -> new OrderResponse(order.getOrderNumber(),mapToOrderLineItemsDto(order.getOrderLineItemsList()))).collect(Collectors.toList());
-        return tours;
+        return tourResponse;
     }
+    private Mono<CarDto> fetchCarById(Long carId) {
+        String url = String.format("%s/cars/%d", carServiceBaseUrl, carId);
+        return webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(CarDto.class);
+    }
+
+
 
 }
